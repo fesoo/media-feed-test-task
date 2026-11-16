@@ -90,7 +90,7 @@ This is a frontend prototype, not a production video platform. Six synthetic cli
 
 A clean dependency installation, TypeScript check, production build, local media delivery, and MP4 range requests have been verified. There is no unit/component/E2E test suite yet. The [project review](docs/PROJECT_REVIEW.md) records lifecycle and interaction issues to address next, and the [testing document](docs/TESTING.md) distinguishes completed checks from proposed scenarios.
 
-GitHub Actions is configured to install dependencies and build the application. Its hosted result must be checked after the first push. The application has no hosted live demo yet.
+GitHub Actions installs dependencies and builds the application. The [first hosted CI run](https://github.com/fesoo/media-feed-test-task/actions/runs/43820847036) passed successfully. The application has no hosted live demo yet.
 
 ## Demo assets and license
 
