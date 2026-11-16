@@ -1,0 +1,479 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #f8fafc;
+  background: #050608;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #050608;
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+button,
+select {
+  color: inherit;
+}
+
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+.media-feed:focus-visible {
+  outline: 2px solid #7dd3fc;
+  outline-offset: 3px;
+}
+
+.app-shell {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  max-width: 720px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #050608;
+}
+
+.media-feed {
+  height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+  touch-action: none;
+  background: #050608;
+}
+
+.media-feed::-webkit-scrollbar {
+  display: none;
+}
+
+.media-feed--transitioning {
+  pointer-events: none;
+}
+
+.feed-item {
+  position: relative;
+  height: 100dvh;
+  min-height: 100dvh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  overflow: hidden;
+  background: #050608;
+}
+
+.feed-spacer {
+  flex: 0 0 auto;
+  pointer-events: none;
+}
+
+.video-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  background: #090a0d;
+}
+
+.video-card__poster,
+.video-card__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-card__poster {
+  filter: saturate(0.9) brightness(0.7);
+  transform: scale(1.02);
+}
+
+.video-card__media {
+  z-index: 1;
+}
+
+.video-card__gesture-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.video-card__shade {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.36), transparent 23%),
+    linear-gradient(to top, rgba(0, 0, 0, 0.82), transparent 48%);
+}
+
+.feed-toolbar {
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: calc(14px + var(--safe-top)) calc(14px + var(--safe-right)) 12px calc(14px + var(--safe-left));
+  pointer-events: none;
+}
+
+.feed-toolbar > * {
+  pointer-events: auto;
+}
+
+.feed-toolbar__eyebrow,
+.feed-toolbar__network {
+  margin: 0;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+}
+
+.feed-toolbar__eyebrow {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.feed-toolbar__network {
+  margin-top: 3px;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 11px;
+}
+
+.repeat-control {
+  display: grid;
+  gap: 4px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  background: rgba(5, 6, 8, 0.48);
+  backdrop-filter: blur(16px);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.repeat-control select {
+  width: 98px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.video-card__content {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 18px;
+  padding: 24px calc(16px + var(--safe-right)) calc(42px + var(--safe-bottom)) calc(16px + var(--safe-left));
+  pointer-events: none;
+}
+
+.video-card__copy {
+  min-width: 0;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.75);
+}
+
+.video-card__copy p,
+.video-card__copy h2 {
+  margin: 0;
+}
+
+.video-card__copy h2 {
+  margin-top: 8px;
+  max-width: 26ch;
+  font-size: clamp(20px, 5.2vw, 28px);
+  line-height: 1.08;
+}
+
+.video-card__copy > p:last-child {
+  margin-top: 9px;
+  max-width: 46ch;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.video-card__author {
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.video-actions {
+  display: grid;
+  gap: 14px;
+  pointer-events: auto;
+}
+
+.video-action {
+  display: grid;
+  place-items: center;
+  gap: 4px;
+  min-width: 48px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.video-action svg {
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+}
+
+.video-action span {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.video-action--liked {
+  color: #fb7185;
+}
+
+.timeline {
+  position: absolute;
+  z-index: 12;
+  left: calc(12px + var(--safe-left));
+  right: calc(12px + var(--safe-right));
+  bottom: calc(12px + var(--safe-bottom));
+  height: 20px;
+  pointer-events: auto;
+}
+
+.timeline__track {
+  position: absolute;
+  top: 9px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.timeline__buffered,
+.timeline__played {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+}
+
+.timeline__buffered {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.timeline__played {
+  background: #fff;
+}
+
+.timeline__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 20px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.playback-indicator,
+.buffering-indicator,
+.speed-badge,
+.media-error {
+  position: absolute;
+  z-index: 8;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.playback-indicator {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(14px);
+}
+
+.playback-indicator svg {
+  width: 30px;
+  height: 30px;
+  margin-left: 4px;
+}
+
+.buffering-indicator {
+  width: 34px;
+  height: 34px;
+  border: 3px solid rgba(255, 255, 255, 0.24);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.speed-badge {
+  top: 16%;
+  padding: 7px 11px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  font-weight: 800;
+  backdrop-filter: blur(12px);
+}
+
+.media-error {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  width: min(280px, calc(100% - 48px));
+  padding: 20px;
+  border-radius: 18px;
+  background: rgba(10, 12, 16, 0.84);
+  backdrop-filter: blur(18px);
+  text-align: center;
+}
+
+.media-error p {
+  margin: 0;
+  font-weight: 700;
+}
+
+.media-error button,
+.feed-status button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  padding: 9px 13px;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.media-error button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.feed-counter {
+  position: absolute;
+  z-index: 20;
+  right: calc(14px + var(--safe-right));
+  bottom: calc(14px + var(--safe-bottom));
+  padding: 5px 8px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.45);
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 10px;
+  pointer-events: none;
+}
+
+.next-page-indicator {
+  position: fixed;
+  z-index: 25;
+  left: 50%;
+  bottom: calc(48px + var(--safe-bottom));
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  border-radius: 99px;
+  background: rgba(0, 0, 0, 0.7);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.feed-status {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 16px;
+  width: 100%;
+  height: 100dvh;
+  background: #050608;
+}
+
+.feed-status .buffering-indicator {
+  position: static;
+  transform: none;
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.feed-status .buffering-indicator {
+  animation-name: spin-static;
+}
+
+@keyframes spin-static {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 721px) {
+  body {
+    background: #111318;
+  }
+
+  .app-shell {
+    box-shadow: 0 0 80px rgba(0, 0, 0, 0.55);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.next-page-indicator--error {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  cursor: pointer;
+}
